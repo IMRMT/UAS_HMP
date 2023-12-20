@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Prefs
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/notification" routerLinkActive="router-link-active" >
+        <ion-icon name="notifications" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title size="large">Prefs</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+
+    <ion-avatar position="center" style="display: block;
+    margin: 0 auto; width: 200px; height: 200px;"><ion-img [src]="accounts[0].url" alt="https://ionicframework.com/docs/img/demos/card-media.png"
+      ></ion-img></ion-avatar>
+    <ion-item>
+      <ion-label>Dark Mode</ion-label>
+      <ion-toggle></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Notifications</ion-label>
+      <ion-toggle></ion-toggle>
+    </ion-item>
+    <ion-card-header class="center-content">
+      <ion-row>
+        <ion-item>
+          <ion-label position="floating">Old Password</ion-label>
+          <ion-input [(ngModel)]="accounts[0].Password"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label position="floating">New Password</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label position="floating">Retype New Password</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-row>
+    </ion-card-header>
+    <ion-button routerLink="/home" routerLinkActive="router-link-active" >Change Password</ion-button>
+  </div>
+

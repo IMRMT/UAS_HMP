@@ -1,0 +1,111 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Create Cerbung
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/notification" routerLinkActive="router-link-active" >
+        <ion-icon name="notifications" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Create Cerbung</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <!-- Section 1 -->
+    <div *ngIf="jenistampilan == 'first'">
+      <ion-list>
+        <ion-item>
+          <ion-input [(ngModel)]="c_title" label="Cerbung Title" labelPlacement="floating"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-textarea [(ngModel)]="c_desc" label="Short Description" labelPlacement="floating"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-input [(ngModel)]="c_url" label="Cerbung Image Cover" labelPlacement="floating"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-select [(ngModel)]="c_genre" label="Choose Genre" labelPlacement="floating">
+            <ion-select-option *ngFor="let genre of arr_genre" [value]="genre">
+              {{ genre }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-button slot="end" (click)="nextSection('second')">Next</ion-button>
+          <p class="page-indicator">1 of 3</p>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Section 2 -->
+    <div *ngIf="jenistampilan == 'second'">
+      <ion-list>
+        <ion-item>
+          <ion-label>Access to this Cerbung</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-radio-group [(ngModel)]="c_access">
+            <ion-item>
+              <ion-radio value="Restricted"></ion-radio>
+              Restricted
+            </ion-item>
+            <ion-item>
+              <ion-radio value="Public"></ion-radio>
+              Public
+            </ion-item>
+          </ion-radio-group>
+        </ion-item>
+        <ion-item>
+          <ion-textarea [(ngModel)]="c_paragraf" (ionInput)="countCharacters($event)" label="Write First Paragraph" labelPlacement="floating"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-button (click)="prevSection('first')">Prev</ion-button>
+          <p class="page-indicator">2 of 3</p>
+          <ion-button (click)="nextSection('third')">Next</ion-button>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Section 3 -->
+    <div *ngIf="jenistampilan == 'third'">
+      <ion-item>
+        <ion-text>{{ c_title }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-button>
+          {{ c_genre }}
+        </ion-button>
+        <ion-button>
+          {{ c_access }}
+        </ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-text>{{ c_desc }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-text>-------------------</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-text>{{ c_paragraf }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-checkbox [(ngModel)]="agreedToTerms">I agree to the terms and conditions</ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-button (click)="prevSection('second')">Prev</ion-button>
+        <ion-button (click)="publishCerbung()" [disabled]="!agreedToTerms">Publish This Cerbung</ion-button>
+      </ion-item>
+    </div>
+  </div>
+</ion-content>
