@@ -1,53 +1,90 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CerbungserviceService {
 
-  cerbungs = [
-    {
-      title: "Rahasia Terkunci di Perpustakaan Kuno",
-      url: "https://cdn0-production-images-kly.akamaized.net/PQSxrArjnGsvtGXt58xYi5NRTTU=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/1017658/original/035927600_1444628523-kpl-640x386.jpg",
-      desc : '"Rahasia Terkunci di Perpustakaan Kuno" mengisahkan tentang seorang mahasiswa bernama Alex yang secara tak sengaja menemukan sebuah buku kuno yang misterius di perpustakaan universitasnya.',
-      genre : "Aksi", 
-      access: "",
-      paragraf : "",
-      author : "Theodorus RH",
-      date : "13/07/2022",
-    },
-    {
-      title: "Rahasia banteng merah",
-      url: "https://asset.kompas.com/crops/gPeOWFA3DUFaCuYq0NhrzsdXB7E=/0x0:779x519/750x500/data/photo/2021/10/15/61698c7aece86.jpg",
-      desc : '"merah adalah kunci kemenangan.',
-      genre : "Horror",
-      access : "",
-      paragraf : "",
-      author : "Vinsent Farrel",
-      date : "07/09/2023",
-    },
-    {
-      title: "Manusia setengah salmon",
-      url: "https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2021/11/29/792355515.jpg",
-      desc : '"Manusia dengan insang salmon.',
-      genre : "Kocak",
-      access : "",
-      paragraf : "",
-      author : "Michael Timonuli",
-      date : "29/03/2021",
-    }
-  ]
-  constructor() { }
-  addCerbung(c_title: string,  c_desc: string, c_url: string, c_genre: string, c_access: string, c_paragraf: string, c_author:string, c_date:string) {
-    this.cerbungs.push({
-      title: c_title,
-      desc: c_desc,
-      url: c_url,
-      genre: c_genre,
-      access: c_access,
-      paragraf: c_paragraf,
-      author: c_author,
-      date: c_date,
-    })
+  constructor(private http: HttpClient) { }
+
+  cerbungList(): Observable<any> {
+    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/cerbungs.php");
+  }
+
+  addCerbung(c_title: string,  c_desc: string, c_url: string, c_genre: string, c_access: number,c_paragraf: string, c_like:number) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('judul', c_title);
+    body.set('deskripsi', c_desc);
+    body.set('genre', c_genre);
+    body.set('paragraf', c_paragraf);
+    body.set('url_cerbung', c_url);
+    body.set('akses', c_access.toString());
+    body.set('like', c_like.toString());
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160421144/cerbungs/new_cerbung.php", urlEncodedData, { headers });
+  }
+
+  updateCerbung(c_id: number,c_title: string,  c_desc: string, c_url: string, c_genre: string, c_access: number, 
+    c_paragraf: string, c_like:number) {
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('id', c_id.toString());
+    body.set('judul', c_title);
+    body.set('deskripsi', c_desc);
+    body.set('genre', c_genre);
+    body.set('paragraf', c_paragraf);
+    body.set('url_cerbung', c_url);
+    body.set('akses', c_access.toString());
+    body.set('like', c_like.toString());
+    const urlEncodedData = body.toString();
+    return this.http.post(
+    "https://ubaya.me/hybrid/160421144/cerbungs/update_cerbung.php", urlEncodedData, { headers });
+  }
+
+  deleteCerbung(c_id: number) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('id', c_id.toString());
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160421144/cerbungs/delete_cerbung.php", urlEncodedData, { headers });
+  }
+
+  signUp(c_username: string, c_pass: string, c_url: string,c_like: number){
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('username', c_username);
+    body.set('password', c_pass);
+    body.set('url', c_url);
+    body.set('like', c_like.toString());
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160421144/cerbungs/signup.php", urlEncodedData, { headers });
+  }
+
+  login(c_username: string, c_pass: string) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('username', c_username);
+    body.set('password', c_pass);
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160421144/cerbungs/login.php", urlEncodedData, { headers });
+  }
+
+  addParagraf(c_storyTeller: string,  c_idCerbung: number, c_paragraf: string) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('story_teller', c_storyTeller);
+    body.set('idc', c_idCerbung.toString());
+    body.set('paragraf', c_paragraf);
+    const urlEncodedData = body.toString();
+    return this.http.post(
+    "https://ubaya.me/hybrid/160421144/cerbungs/new_cerbung.php", urlEncodedData, { headers });
   }
 }
