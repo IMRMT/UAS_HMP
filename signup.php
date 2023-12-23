@@ -5,8 +5,8 @@ include('koneksi.php');
 extract($_POST);
 //$_POST['name'] $_POST['desc']
 $stmt = $conn->prepare(
-"INSERT INTO akuns (name, description, price, url) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssis", $name, $desc, $price, $url);
+"INSERT INTO akuns (username, password, url, like) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("sssi", $username, $password, $url, $like);
 if ($stmt->execute()) {
    $arr=["result"=>"success"];
 } else {
