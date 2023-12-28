@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AccountserviceService } from './accountservice.service';
+import { CerbungserviceService } from './cerbungservice.service';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +8,30 @@ import { AccountserviceService } from './accountservice.service';
 })
 export class AppComponent {
 
-  showTabs = false;
-  constructor(private accountService: AccountserviceService, private appRouting: AppRoutingModule) {
+  username = ""
+  password = ""
+  name = ""
 
+  constructor(private cerbungService: CerbungserviceService) {
+
+  }
+
+  login() {
+    this.cerbungService.login(this.username, this.password).subscribe(
+      (response: any) => {
+        if (response.result === 'success') {
+          alert("success")
+          this.username = response.username
+          this.name = response.username
+        }
+        else {
+          alert(response.message)
+        }
+      });
+  }
+
+  logout() {
+    this.username = ""
+    this.name= ""
   }
 }

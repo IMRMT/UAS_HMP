@@ -48,19 +48,19 @@
   <div *ngIf="tipeGenre == 'All' || (bookTitle && tipeGenre == 'All')">
     <ion-card *ngFor="let cerbungs2 of chunkArray(cerbungs, 2); let i = index">
       <ng-container *ngFor="let cerbung of cerbungs2; let i2 = index">
-        <img [src]="cerbung.url" alt="{{ cerbung.title}}" class="image" />
+        <img [src]="cerbung.url_cerbung" alt="{{ cerbung.judul}}" class="image" />
         <ion-card-header>
-          <ion-card-title>{{ cerbung.title }}</ion-card-title>
+          <ion-card-title>{{ cerbung.judul }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <ion-item>
-            by {{cerbung.author}}
+            by {{cerbung.idcerbung}}
           </ion-item>
           <ion-list>
-            <ion-item>{{ cerbung.desc }}</ion-item>
+            <ion-item>{{ cerbung.deskripsi }}</ion-item>
           </ion-list>
           <div class="right">
-            <ion-button routerLink="/cerbungdetail/{{(i*2)+i2}}" default="true" outline="true">{{cerbung.id}}Read</ion-button>
+            <ion-button routerLink="/cerbungdetail/{{(i*2)+i2}}" default="true" outline="true">{{cerbung.idcerbung}}Read</ion-button>
           </div>
         </ion-card-content>
       </ng-container>

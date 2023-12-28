@@ -16,10 +16,10 @@ export class CreatecerbungPage implements OnInit {
   c_desc = ""
   c_url = ""
   c_genre=""
-  c_access = ""
+  c_access = 0
   c_paragraf = ""
   c_author=""
-  c_date=""
+  c_like= 0
   arr_genre:string[] = []
 
   characterCount: number = 0;
@@ -32,27 +32,25 @@ export class CreatecerbungPage implements OnInit {
 
   submitCerbung() {
     this.cerbungservice.addCerbung(
-      this.c_title, 
+      this.c_title,  
       this.c_desc, 
       this.c_url, 
       this.c_genre, 
-      this.c_access, 
-      this.c_paragraf,
-      this.c_author,
-      this.c_date)
-      this.router.navigate(['/home']); 
+      this.c_access,
+      this.c_paragraf, 
+      this.c_like )
+      this.router.navigate(['/home']);
   }
 
   resetForm() {
     this.jenistampilan = 'first';
-    this.c_title = '';
-    this.c_desc = '';
-    this.c_url = '';
-    this.c_genre = '';
-    this.c_access = 'Restricted';
-    this.c_paragraf = '';
-    this.c_author='';
-    this.c_date='';
+    this.c_title = "";  
+    this.c_desc = "";
+    this.c_url ="";
+    this.c_genre ="";
+    this.c_access=1;
+    this.c_paragraf=""; 
+    this.c_like= 0;
     this.agreedToTerms=false;
   }
 
@@ -64,7 +62,7 @@ export class CreatecerbungPage implements OnInit {
         this.jenistampilan = section;
       }
     } else if(this.jenistampilan =="second"){
-      if( this.c_access == ''||this.c_paragraf == ''){
+      if( this.c_access == 1 ||this.c_paragraf == ''){
         alert("Mohon isi data yang kosong !")
       }else{
         this.jenistampilan = section;
@@ -83,7 +81,7 @@ export class CreatecerbungPage implements OnInit {
 
   publishCerbung() {
     if (this.agreedToTerms) {
-      this.cerbungservice.addCerbung(this.c_title, this.c_desc, this.c_url, this.c_genre, this.c_access, this.c_paragraf,this.c_author = 'admin',this.c_date);
+      this.cerbungservice.addCerbung(this.c_title,this.c_desc,this.c_url,this.c_genre,this.c_access,this.c_paragraf,this.c_like);
       this.router.navigate(['/home']);
       this.resetForm();
     }

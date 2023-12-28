@@ -6,19 +6,20 @@ import { AccountserviceService } from './accountservice.service';
 
 const routes: Routes = [
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
-  },
-  {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'tabs',
     children: [
-      { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule) },
+      { path: 'login', loadChildren: () => import('./home/home.module').then(m => m.HomePageModule) },
 
     ]
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
   {
     path: 'cerbungdetail/:index',
@@ -47,11 +48,6 @@ const routes: Routes = [
   {
     path: 'newaccount',
     loadChildren: () => import('./newaccount/newaccount.module').then(m => m.NewaccountPageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
   },
   {
     path: 'userdetail',

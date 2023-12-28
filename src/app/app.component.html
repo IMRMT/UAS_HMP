@@ -2,8 +2,8 @@
   <!-- <ion-router-outlet></ion-router-outlet> -->
   <!-- tabs.page.html -->
 
-  <ion-router-outlet id="main-content"> </ion-router-outlet>
-  <ion-menu auto-hide="true" content-id="main-content">
+  <!-- <ion-router-outlet id="main-content"> </ion-router-outlet> -->
+  <ion-menu auto-hide="true" content-id="main-content" *ngIf="name">
     <ion-header>
       <ion-toolbar>
         <ion-title>Cerbung</ion-title>
@@ -37,12 +37,30 @@
             <ion-label>Prefs</ion-label>
           </ion-item>
         </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>
+            <ion-button (click)="logout()" color="danger">Logout</ion-button>
+          </ion-item>
+        </ion-menu-toggle>
       </ion-list>
     </ion-content>
   </ion-menu>
 
+  <ion-content *ngIf="!name" class="ion-padding">
+    <ion-card>
+      <ion-item>
+        <ion-input [(ngModel)]="username" label="Username" labelPlacement="floating" />
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="password" type="password" label="Password" labelPlacement="floating" />
+      </ion-item>
+      <ion-button expand="block" (click)="login()">Login</ion-button>
+    </ion-card>
+  </ion-content>
 
-  <ion-tabs *ngIf ="showTabs">
+  <ion-router-outlet *ngIf="name" id="main-content"></ion-router-outlet>
+
+  <ion-tabs *ngIf="name">
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="home">
         <ion-icon name="home"></ion-icon>
@@ -66,4 +84,5 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
+
 </ion-app>

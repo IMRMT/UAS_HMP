@@ -10,17 +10,23 @@ import { CerbungserviceService } from '../cerbungservice.service';
 export class CerbungdetailPage implements OnInit {
 
   index = 0
-  constructor(private route:ActivatedRoute, private cerbungservice:CerbungserviceService) { }
+  constructor(private route: ActivatedRoute, private cerbungservice: CerbungserviceService) { }
 
-  cerbungs:any[] = [];
+  cerbungs: any[] = [];
 
   ngOnInit() {
-    this.route.params.subscribe(
-      params => {
-        this.index = params['index']
-      }
-    )
-    this.cerbungs = this.cerbungservice.cerbungs
-  }
+    //   this.route.params.subscribe(
+    //     params => {
+    //       this.index = params['index']
+    //     }
+    //   )
+    //   this.cerbungs = this.cerbungservice.cerbungList()
+    // }
 
+    this.cerbungservice.cerbungList().subscribe(
+      (data) => {
+        this.cerbungs = data['index']
+      }
+    );
+  }
 }
