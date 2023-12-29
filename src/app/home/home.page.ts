@@ -14,13 +14,13 @@ export class HomePage implements OnInit {
   cerbungs: any[] = [];
 
 
-  // chunkArray(arr: any[], chunkSize: number): any[][] {
-  //   const result = [];
-  //   for (let i = 0; i < arr.length; i += chunkSize) {
-  //     result.push(arr.slice(i, i + chunkSize));
-  //   }
-  //   return result;
-  // }
+  chunkArray(arr: any[], chunkSize: number): any[][] {
+    const result = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+      result.push(arr.slice(i, i + chunkSize));
+    }
+    return result;
+  }
 
   loadCerbungData() {
     this.cerbungservice.cerbungList(this.search).subscribe((data) => {
@@ -33,6 +33,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     // this.loadCerbungData();
+
     if(this.search==''){
       this.result='%%'
     }else{
@@ -59,4 +60,17 @@ export class HomePage implements OnInit {
       }
     );
   }
+
+  filterCerbungList() {
+    // Filter the pasta list based on the search query
+    this.cerbungs = this.cerbungs.filter((cerbung: { judul: string; }) =>
+      cerbung.judul.toLowerCase().includes(this.search.toLowerCase())
+    );
+  }
+  clearSearchText() {
+    this.search = '';
+    this.loadCerbungData();
+  }
+
+
 }

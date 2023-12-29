@@ -7,8 +7,8 @@
       Home
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/notification" routerLinkActive="router-link-active" >
-        <ion-icon name="notifications" ></ion-icon>
+      <ion-button routerLink="/notification" routerLinkActive="router-link-active">
+        <ion-icon name="notifications"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -26,7 +26,9 @@
 
   <div id="content">
     <ion-row>
-      <ion-searchbar [debounce]="1000"  (ionInput)="handleInput($event)"></ion-searchbar>
+      <!-- <ion-searchbar [debounce]="1000"  (ionInput)="handleInput($event)"></ion-searchbar> -->
+      <ion-searchbar [(ngModel)]="search" (ionChange)="filterCerbungList()"></ion-searchbar>
+      <ion-button (click)="clearSearchText()">Clear</ion-button>
     </ion-row>
 
     <ion-segment [(ngModel)]="tipeGenre">
@@ -45,7 +47,7 @@
     </ion-segment>
   </div>
 
-  <div *ngIf="tipeGenre=='All'">
+  <!-- <div *ngIf="tipeGenre=='All'">
     <ion-card *ngFor="let cerbung of cerbungs">
       <img [src]="cerbung.url_cerbung">
       <ion-card-header>
@@ -62,6 +64,84 @@
         </ion-item>          
       </ion-list>
     </ion-card>
-  </div>
+  </div> -->
+
+  <!-- || (search && tipeGenre == 'All') -->
+  <div *ngIf="tipeGenre == 'All' ">
+    <ion-card *ngFor="let cerbungs2 of chunkArray(cerbungs, 2); let i = index">
+      <ng-container *ngFor="let cerbung of cerbungs2; let i2 = index">
+        <img [src]="cerbung.url_cerbung" alt="{{cerbung.judul}}" class="image" />
+        <ion-card-header>
+          <ion-card-title>{{cerbung.judul}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            by {{cerbung.idcerbung}}
+          </ion-item>
+          <ion-list>
+            <ion-item>{{ cerbung.deskripsi }}</ion-item>
+          </ion-list>
+          <div class="right">
+            <ion-button routerLink="/cerbungdetail/{{(i*2)+i2}}" default="true"
+              outline="true">{{cerbung.idcerbung}}Read</ion-button>
+          </div>
+        </ion-card-content>
+      </ng-container>
+    </ion-card>
+    <br>
+      
+  </div> 
+
+  <div *ngIf="tipeGenre == tipeGenre ">
+    <ion-card *ngFor="let cerbungs2 of chunkArray(cerbungs, 2); let i = index">
+      <ng-container *ngFor="let cerbung of cerbungs2; let i2 = index">
+        <div *ngIf="tipeGenre==cerbung.genre">
+          <img [src]="cerbung.url_cerbung" alt="{{cerbung.judul}}" class="image" />
+          <ion-card-header>
+            <ion-card-title>{{cerbung.judul}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item>
+              by {{cerbung.idcerbung}}
+            </ion-item>
+            <ion-list>
+              <ion-item>{{ cerbung.deskripsi }}</ion-item>
+            </ion-list>
+            <div class="right">
+              <ion-button routerLink="/cerbungdetail/{{(i*2)+i2}}" default="true"
+                outline="true">{{cerbung.idcerbung}}Read</ion-button>
+            </div>
+          </ion-card-content>
+        </div>
+      </ng-container>
+    </ion-card>
+    <br>
+      
+  </div> 
+
+  <div *ngIf="tipeGenre == 'All' ">
+    <ion-card *ngFor="let cerbungs2 of chunkArray(cerbungs, 2); let i = index">
+      <ng-container *ngFor="let cerbung of cerbungs2; let i2 = index">
+        <img [src]="cerbung.url_cerbung" alt="{{cerbung.judul}}" class="image" />
+        <ion-card-header>
+          <ion-card-title>{{cerbung.judul}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            by {{cerbung.idcerbung}}
+          </ion-item>
+          <ion-list>
+            <ion-item>{{ cerbung.deskripsi }}</ion-item>
+          </ion-list>
+          <div class="right">
+            <ion-button routerLink="/cerbungdetail/{{(i*2)+i2}}" default="true"
+              outline="true">{{cerbung.idcerbung}}Read</ion-button>
+          </div>
+        </ion-card-content>
+      </ng-container>
+    </ion-card>
+    <br>
+      
+  </div> 
 
 </ion-content>
