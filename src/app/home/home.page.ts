@@ -21,15 +21,17 @@ export class HomePage implements OnInit {
     return result;
   }
 
+  loadCerbungData() {
+    this.cerbungservice.cerbungList().subscribe((data) => {
+      this.cerbungs = data;
+    });
+  }
+
+
   constructor(private cerbungservice: CerbungserviceService) { }
 
   ngOnInit() {
-    this.cerbungservice.cerbungList().subscribe(
-      (data) => {
-        this.cerbungs = data;
-        this.filteredCerbungs = data; // Initialize filteredCerbungs with all cerbungs
-      }
-    );
+    this.loadCerbungData();
   }
 
   filterCerbungTitle() {

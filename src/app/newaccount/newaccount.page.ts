@@ -14,7 +14,7 @@ export class NewaccountPage implements OnInit {
   new_conf = ""
   new_url = ""
   new_pass = ""
-
+ like = 0
 
   constructor(private accountservice:AccountserviceService,private router:Router) { }
 
@@ -23,7 +23,16 @@ export class NewaccountPage implements OnInit {
 
   submitAccount() {
     if (this.new_conf === this.new_pass){
-      this.accountservice.addAccount(this.new_name, this.new_url, this.new_pass)
+      this.accountservice.addAccount(this.new_name, this.new_pass, this.new_url, this.like).subscribe(
+        (response: any) => {
+          if (response.result === 'success') {
+            alert(response.message);
+          }
+          else {
+            alert(response.message);
+          }
+        }
+      )
       this.new_name=""
       this.new_url=""
       this.new_pass=""

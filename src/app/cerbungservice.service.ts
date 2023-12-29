@@ -13,6 +13,10 @@ export class CerbungserviceService {
     return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/cerbungs.php");
   }
 
+  cerbungDetail(id: number): Observable<any> {
+    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/cerbung_detail.php?id=" + id)
+  }
+
   addCerbung(c_title: string,  c_desc: string, c_url: string, c_genre: string, c_access: number,c_paragraf: string, c_like:number) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     const body = new URLSearchParams();
@@ -26,33 +30,6 @@ export class CerbungserviceService {
     const urlEncodedData = body.toString();
     return this.http.post(
       "https://ubaya.me/hybrid/160421144/cerbungs/new_cerbung.php", urlEncodedData, { headers });
-  }
-
-  updateCerbung(c_id: number,c_title: string,  c_desc: string, c_url: string, c_genre: string, c_access: number, 
-    c_paragraf: string, c_like:number) {
-
-    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    const body = new URLSearchParams();
-    body.set('id', c_id.toString());
-    body.set('judul', c_title);
-    body.set('deskripsi', c_desc);
-    body.set('genre', c_genre);
-    body.set('paragraf', c_paragraf);
-    body.set('url_cerbung', c_url);
-    body.set('akses', c_access.toString());
-    body.set('like', c_like.toString());
-    const urlEncodedData = body.toString();
-    return this.http.post(
-    "https://ubaya.me/hybrid/160421144/cerbungs/update_cerbung.php", urlEncodedData, { headers });
-  }
-
-  deleteCerbung(c_id: number) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    const body = new URLSearchParams();
-    body.set('id', c_id.toString());
-    const urlEncodedData = body.toString();
-    return this.http.post(
-      "https://ubaya.me/hybrid/160421144/cerbungs/delete_cerbung.php", urlEncodedData, { headers });
   }
 
   signUp(c_username: string, c_pass: string, c_url: string,c_like: number){

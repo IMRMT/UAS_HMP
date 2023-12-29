@@ -30,18 +30,6 @@ export class CreatecerbungPage implements OnInit {
     this.arr_genre = ["Kocak","Horror","Aksi"]
   }
 
-  submitCerbung() {
-    this.cerbungservice.addCerbung(
-      this.c_title,  
-      this.c_desc, 
-      this.c_url, 
-      this.c_genre, 
-      this.c_access,
-      this.c_paragraf, 
-      this.c_like )
-      this.router.navigate(['/home']);
-  }
-
   resetForm() {
     this.jenistampilan = 'first';
     this.c_title = "";  
@@ -81,9 +69,27 @@ export class CreatecerbungPage implements OnInit {
 
   publishCerbung() {
     if (this.agreedToTerms) {
-      this.cerbungservice.addCerbung(this.c_title,this.c_desc,this.c_url,this.c_genre,this.c_access,this.c_paragraf,this.c_like);
-      this.router.navigate(['/home']);
-      this.resetForm();
+      this.cerbungservice.addCerbung(this.c_title, this.c_desc, this.c_url, this.c_genre,
+        this.c_access, this.c_paragraf, this.c_like).subscribe(
+          (response: any) => {
+            if (response.result === 'success') {
+              alert(response.message);
+            }
+            else {
+              alert(response.message);
+            }
+          }
+        )
+        this.c_title = ""
+        this.c_desc = ""
+        this.c_url = ""
+        this.c_genre = ""
+        this.c_access = 0
+        this.c_paragraf = ""
+        this.c_author = ""
+        this.c_like = 0
+        this.router.navigate(['/home']);
+        this.resetForm();
     }
   }
 

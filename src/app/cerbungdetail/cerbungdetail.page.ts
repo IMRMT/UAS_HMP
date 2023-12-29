@@ -15,18 +15,14 @@ export class CerbungdetailPage implements OnInit {
   cerbungs: any[] = [];
 
   ngOnInit() {
-    //   this.route.params.subscribe(
-    //     params => {
-    //       this.index = params['index']
-    //     }
-    //   )
-    //   this.cerbungs = this.cerbungservice.cerbungList()
-    // }
-
-    this.cerbungservice.cerbungList().subscribe(
-      (data) => {
-        this.cerbungs = data['index']
-      }
-    );
+    this.route.params.subscribe(
+      params => {
+        this.index = params['index']
+        this.cerbungservice.cerbungDetail(this.index).subscribe(
+          (data) => {
+            this.cerbungs = data
+          }
+        );
+      });
   }
 }
