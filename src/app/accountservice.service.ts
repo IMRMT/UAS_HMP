@@ -8,11 +8,6 @@ import { Observable } from 'rxjs';
 export class AccountserviceService {
 
   constructor(private http: HttpClient) { }
-
-  pastaList(): Observable<any> {
-    return this.http.get("https://ubaya.me/hybrid/160421078/pasta/pastas.php?search=${searchText}");
-    //sesuaikan dengan nrp
-  }
   
   addAccount(c_name:string,c_pass:string,c_url:string, c_like: number) {
     // this.accounts.push({
@@ -29,6 +24,6 @@ export class AccountserviceService {
     body.set('like', c_like.toString());
     const urlEncodedData = body.toString();
     return this.http.post(
-      "https://ubaya.me/hybrid/160421078/cerbungs/signup.php", urlEncodedData, { headers });
+      "https://ubaya.me/hybrid/160421144/cerbungs/signup.php", urlEncodedData, { headers });
   }
 }

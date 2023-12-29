@@ -1,6 +1,7 @@
 <?php
 include('koneksi.php');
-$sql = "SELECT * FROM cerbungs";
+$get = "%".$_GET['search']."%";
+$sql = "SELECT * FROM cerbungs WHERE judul LIKE '$get'";
 $result = $conn->query($sql);
 $data = array();
 

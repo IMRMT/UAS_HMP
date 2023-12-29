@@ -9,20 +9,21 @@ import { CerbungserviceService } from '../cerbungservice.service';
 export class HomePage implements OnInit {
 
   tipeGenre = "All";
-  bookTitle = "";
+  search= "";
+  result= "";
   cerbungs: any[] = [];
-  filteredCerbungs: any[] = [];  // Introduce a new property for filtered cerbungs
 
-  chunkArray(arr: any[], chunkSize: number): any[][] {
-    const result = [];
-    for (let i = 0; i < arr.length; i += chunkSize) {
-      result.push(arr.slice(i, i + chunkSize));
-    }
-    return result;
-  }
+
+  // chunkArray(arr: any[], chunkSize: number): any[][] {
+  //   const result = [];
+  //   for (let i = 0; i < arr.length; i += chunkSize) {
+  //     result.push(arr.slice(i, i + chunkSize));
+  //   }
+  //   return result;
+  // }
 
   loadCerbungData() {
-    this.cerbungservice.cerbungList().subscribe((data) => {
+    this.cerbungservice.cerbungList(this.search).subscribe((data) => {
       this.cerbungs = data;
     });
   }
@@ -31,18 +32,31 @@ export class HomePage implements OnInit {
   constructor(private cerbungservice: CerbungserviceService) { }
 
   ngOnInit() {
-    this.loadCerbungData();
+    // this.loadCerbungData();
+    if(this.search==''){
+      this.result='%%'
+    }else{
+      this.result='%' + this.search + '%'
+    }
+    this.cerbungservice.cerbungList(this.result).subscribe( //untuk yg Observe di foodservice
+      (data) => {
+        this.cerbungs = data //diisi dengan data dari webservice
+      }
+    );
   }
 
-  filterCerbungTitle() {
-    if (this.tipeGenre === 'All') {
-      this.filteredCerbungs = this.cerbungs.filter(cerbung => {
-        return cerbung.judul.toLowerCase().includes(this.bookTitle.toLowerCase());
-      });
-    } else {
-      this.filteredCerbungs = this.cerbungs.filter(cerbung => {
-        return cerbung.judul.toLowerCase().includes(this.bookTitle.toLowerCase()) && cerbung.genre === this.tipeGenre;
-      });
+  handleInput(event:any){
+    const query = event.target.value.toLowerCase();
+
+    if(query==''){
+      this.result='%%'
+    }else{
+      this.result='%' + query + '%'
     }
+    this.cerbungservice.cerbungList(this.result).subscribe( //untuk yg Observe di foodservice
+      (data) => {
+        this.cerbungs = data //diisi dengan data dari webservice
+      }
+    );
   }
 }

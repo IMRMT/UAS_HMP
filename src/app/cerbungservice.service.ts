@@ -9,8 +9,8 @@ export class CerbungserviceService {
 
   constructor(private http: HttpClient) { }
 
-  cerbungList(): Observable<any> {
-    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/cerbungs.php");
+  cerbungList(search: string): Observable<any> {
+    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/cerbungs.php?search="+search);
   }
 
   cerbungDetail(id: number): Observable<any> {
