@@ -47,25 +47,6 @@
     </ion-segment>
   </div>
 
-  <!-- <div *ngIf="tipeGenre=='All'">
-    <ion-card *ngFor="let cerbung of cerbungs">
-      <img [src]="cerbung.url_cerbung">
-      <ion-card-header>
-        <ion-card-title>{{cerbung.judul}}</ion-card-title>
-      </ion-card-header>
-      <ion-list>
-        <ion-item>
-          {{cerbung.deskripsi}}
-        </ion-item>
-        <ion-item>
-          {{cerbung.genre}}
-        </ion-item>
-        <ion-item>
-        </ion-item>          
-      </ion-list>
-    </ion-card>
-  </div> -->
-
   <!-- || (search && tipeGenre == 'All') -->
   <div *ngIf="tipeGenre == 'All' ">
     <ion-card *ngFor="let cerbungs2 of chunkArray(cerbungs, 2); let i = index">
@@ -76,14 +57,14 @@
         </ion-card-header>
         <ion-card-content>
           <ion-item>
-            by {{cerbung.idcerbung}}
+            by {{cerbung.fk_username}}
           </ion-item>
           <ion-list>
             <ion-item>{{ cerbung.deskripsi }}</ion-item>
           </ion-list>
           <div class="right">
-            <ion-button routerLink="/cerbungdetail/{{(i*2)+i2}}" default="true"
-              outline="true">{{cerbung.idcerbung}}Read</ion-button>
+            <ion-button routerLink="/cerbungdetail/{{cerbung.idcerbung}}" default="true"
+              outline="true">Read</ion-button>
           </div>
         </ion-card-content>
       </ng-container>
@@ -102,14 +83,14 @@
           </ion-card-header>
           <ion-card-content>
             <ion-item>
-              by {{cerbung.idcerbung}}
+              by {{cerbung.fk_username}}
             </ion-item>
             <ion-list>
               <ion-item>{{ cerbung.deskripsi }}</ion-item>
             </ion-list>
             <div class="right">
-              <ion-button routerLink="/cerbungdetail/{{(i*2)+i2}}" default="true"
-                outline="true">{{cerbung.idcerbung}}Read</ion-button>
+              <ion-button routerLink="/cerbungdetail/{{cerbung.idcerbung}}" default="true"
+                outline="true">Read</ion-button>
             </div>
           </ion-card-content>
         </div>
@@ -118,30 +99,4 @@
     <br>
       
   </div> 
-
-  <div *ngIf="tipeGenre == 'All' ">
-    <ion-card *ngFor="let cerbungs2 of chunkArray(cerbungs, 2); let i = index">
-      <ng-container *ngFor="let cerbung of cerbungs2; let i2 = index">
-        <img [src]="cerbung.url_cerbung" alt="{{cerbung.judul}}" class="image" />
-        <ion-card-header>
-          <ion-card-title>{{cerbung.judul}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-item>
-            by {{cerbung.idcerbung}}
-          </ion-item>
-          <ion-list>
-            <ion-item>{{ cerbung.deskripsi }}</ion-item>
-          </ion-list>
-          <div class="right">
-            <ion-button routerLink="/cerbungdetail/{{(i*2)+i2}}" default="true"
-              outline="true">{{cerbung.idcerbung}}Read</ion-button>
-          </div>
-        </ion-card-content>
-      </ng-container>
-    </ion-card>
-    <br>
-      
-  </div> 
-
 </ion-content>

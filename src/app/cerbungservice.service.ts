@@ -14,10 +14,14 @@ export class CerbungserviceService {
   }
 
   cerbungDetail(id: number): Observable<any> {
-    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/cerbung_detail.php?id=" + id)
+    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/cerbung_detail.php?id="+id)
   }
 
-  addCerbung(c_title: string,  c_desc: string, c_url: string, c_genre: string, c_access: number,c_paragraf: string, c_like:number) {
+  cerbungFollowing(name: string):Observable<any>{
+    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/following.php?name="+name)
+  }
+
+  addCerbung(c_title: string,  c_desc: string, c_url: string, c_genre: string, c_access: string,c_paragraf: string, c_username:string) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     const body = new URLSearchParams();
     body.set('judul', c_title);
@@ -26,7 +30,7 @@ export class CerbungserviceService {
     body.set('paragraf', c_paragraf);
     body.set('url_cerbung', c_url);
     body.set('akses', c_access.toString());
-    body.set('like', c_like.toString());
+    body.set('fk_username', c_username);
     const urlEncodedData = body.toString();
     return this.http.post(
       "https://ubaya.me/hybrid/160421144/cerbungs/new_cerbung.php", urlEncodedData, { headers });
@@ -62,6 +66,6 @@ export class CerbungserviceService {
     body.set('paragraf', c_paragraf);
     const urlEncodedData = body.toString();
     return this.http.post(
-    "https://ubaya.me/hybrid/160421144/cerbungs/new_cerbung.php", urlEncodedData, { headers });
+    "https://ubaya.me/hybrid/160421144/cerbungs/add_paragraf.php", urlEncodedData, { headers });
   }
 }

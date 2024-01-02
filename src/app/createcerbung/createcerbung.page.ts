@@ -16,10 +16,10 @@ export class CreatecerbungPage implements OnInit {
   c_desc = ""
   c_url = ""
   c_genre=""
-  c_access = 0
+  c_access = ""
   c_paragraf = ""
   c_author=""
-  c_like= 0
+  c_fkusername=""
   arr_genre:string[] = []
 
   characterCount: number = 0;
@@ -28,6 +28,7 @@ export class CreatecerbungPage implements OnInit {
 
   ngOnInit() {
     this.arr_genre = ["Kocak","Horror","Aksi"]
+    this.c_fkusername=localStorage.getItem("app_username") ?? ''
   }
 
   resetForm() {
@@ -36,9 +37,9 @@ export class CreatecerbungPage implements OnInit {
     this.c_desc = "";
     this.c_url ="";
     this.c_genre ="";
-    this.c_access=1;
-    this.c_paragraf=""; 
-    this.c_like= 0;
+    this.c_access= "Public";
+    this.c_paragraf="";
+    this.c_fkusername="";
     this.agreedToTerms=false;
   }
 
@@ -50,7 +51,7 @@ export class CreatecerbungPage implements OnInit {
         this.jenistampilan = section;
       }
     } else if(this.jenistampilan =="second"){
-      if( this.c_access == 1 ||this.c_paragraf == ''){
+      if( this.c_access == "Public" ||this.c_paragraf == ''){
         alert("Mohon isi data yang kosong !")
       }else{
         this.jenistampilan = section;
@@ -70,7 +71,7 @@ export class CreatecerbungPage implements OnInit {
   publishCerbung() {
     if (this.agreedToTerms) {
       this.cerbungservice.addCerbung(this.c_title, this.c_desc, this.c_url, this.c_genre,
-        this.c_access, this.c_paragraf, this.c_like).subscribe(
+        this.c_access, this.c_paragraf, this.c_fkusername).subscribe(
           (response: any) => {
             if (response.result === 'success') {
               alert(response.message);
@@ -84,10 +85,10 @@ export class CreatecerbungPage implements OnInit {
         this.c_desc = ""
         this.c_url = ""
         this.c_genre = ""
-        this.c_access = 0
+        this.c_access = ""
         this.c_paragraf = ""
         this.c_author = ""
-        this.c_like = 0
+        this.c_fkusername=""
         this.router.navigate(['/home']);
         this.resetForm();
     }

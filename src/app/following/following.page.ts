@@ -7,12 +7,15 @@ import { CerbungserviceService } from '../cerbungservice.service';
   styleUrls: ['./following.page.scss'],
 })
 export class FollowingPage implements OnInit {
-  search= ""
+  jenistampilan = "card"
+  name= ""
   cerbungs: any[] = []
-  constructor(private cerbungservice: CerbungserviceService) { }
+  constructor(private cerbungservice: CerbungserviceService) { 
+    this.name=localStorage.getItem("app_username") ?? ''
+  }
 
   ngOnInit() {
-    this.cerbungservice.cerbungList(this.search).subscribe(
+    this.cerbungservice.cerbungFollowing(this.name).subscribe(
       (data) => {
         this.cerbungs = data
       }

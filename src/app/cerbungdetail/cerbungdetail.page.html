@@ -7,8 +7,8 @@
       Cerbung Detail
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/notification" routerLinkActive="router-link-active" >
-        <ion-icon name="notifications" ></ion-icon>
+      <ion-button routerLink="/notification" routerLinkActive="router-link-active">
+        <ion-icon name="notifications"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -18,19 +18,30 @@
     <ion-toolbar>
       <ion-buttons slot="start">
         <ion-back-button></ion-back-button>
-        </ion-buttons>
+      </ion-buttons>
       <ion-title size="large">Cerbung Detail</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <img [src]="cerbungs[index].url_cerbung" />
-    <ion-card-header>
-      <ion-card-title>{{cerbungs[index].judul}}
-        <ion-badge color="danger">{{cerbungs[index].genre}}</ion-badge>
-      </ion-card-title>
-      <ion-card-subtitle>{{cerbungs[index].deskripsi}}</ion-card-subtitle>
-    </ion-card-header>
-      <ion-card-content>{{cerbungs[index].paragraf}}</ion-card-content>
+    <ion-card>
+      <img [src]="cerbungs.url_cerbung" />
+      <ion-card-header>
+        <ion-card-title>{{cerbungs.judul}}
+          <ion-badge color="danger">{{cerbungs.genre}}</ion-badge>
+        </ion-card-title>
+        <ion-card-subtitle>{{cerbungs.deskripsi}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>{{cerbungs.paragraf}}</ion-card-content>
+    </ion-card>
+  </div>
+
+  <div>
+    <ion-item>
+      <ion-input label="Paragraf : " [(ngModel)]="paragraf"></ion-input>
+    </ion-item>
+    <div class="right">
+      <ion-button id="btnSubmit" expand="block" default="true" outline="true" (click)="addParagraf()">Add</ion-button>
+    </div>
   </div>
 </ion-content>

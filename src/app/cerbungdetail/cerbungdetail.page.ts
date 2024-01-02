@@ -9,10 +9,13 @@ import { CerbungserviceService } from '../cerbungservice.service';
 })
 export class CerbungdetailPage implements OnInit {
 
-  index = 0
-  constructor(private route: ActivatedRoute, private cerbungservice: CerbungserviceService) { }
-
-  cerbungs: any[] = [];
+  index = 1
+  cerbungs:any={};
+  paragraf=""
+  name=""
+  constructor(private route: ActivatedRoute, private cerbungservice: CerbungserviceService) {
+    this.name=localStorage.getItem("app_username") ?? ''
+   }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -24,5 +27,18 @@ export class CerbungdetailPage implements OnInit {
           }
         );
       });
+  }
+
+  addParagraf(){
+    this.cerbungservice.addParagraf(this.name,this.index,this.paragraf).subscribe(
+      (response:any) => {
+        if(response.result == "success"){
+          alert("Success")
+        }
+        else {
+          alert(response.message)
+        }
+      }
+    )
   }
 }

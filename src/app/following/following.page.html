@@ -7,8 +7,8 @@
       Following
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/notification" routerLinkActive="router-link-active" >
-        <ion-icon name="notifications" ></ion-icon>
+      <ion-button routerLink="/notification" routerLinkActive="router-link-active">
+        <ion-icon name="notifications"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -21,25 +21,23 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="contents">
-    <div class="card-content" *ngFor="let cerbung of cerbungs">
-      <ion-card>
-        <ion-card-content>
-          <div class="foto">
-            <img [src]="cerbung.url" alt="{{ cerbung.title }}" class="image" />
-          </div>
-          <div class="text">
-            <div class="cerbung-title">{{ cerbung.title }}</div>
-            <div class="cerbung-info">
-              by {{ cerbung.author }}
-              <br />
-              last update: {{ cerbung.date}}
-            </div>
-          </div>
-        </ion-card-content>
-      </ion-card>
-
-    </div>
+  <div *ngIf="jenistampilan=='card'">
+    <ion-card *ngFor="let cerbung of cerbungs">
+      <ion-router-link  routerLink="/cerbungdetail/{{cerbung.idcerbung}}">
+        <img [src]="cerbung.url_cerbung">
+        <ion-card-header>
+          <ion-card-title>{{cerbung.judul}}</ion-card-title>
+        </ion-card-header>
+        <ion-list>
+          <ion-item>
+            {{cerbung.deskripsi}}
+          </ion-item>
+          <ion-item>
+            {{cerbung.fk_username}}
+          </ion-item>
+        </ion-list>
+      </ion-router-link>
+    </ion-card>
   </div>
 
 
