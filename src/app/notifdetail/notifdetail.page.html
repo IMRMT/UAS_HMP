@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Notif Detail
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/notification" routerLinkActive="router-link-active">
+        <ion-icon name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title size="large">Prefs</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container" *ngFor="let cerbung of cerbungs">
+    <ion-avatar position="center" style="display: block; margin: 0 auto; width: 200px; height: 200px;">
+      <ion-img [src]="cerbung.url_cerbung"></ion-img>
+    </ion-avatar>
+    <ion-item>
+      <ion-label class="center-content">{{cerbung.username}}</ion-label>
+    </ion-item>
+    <img [src]="cerbung.url_cerbung"/>
+    <ion-card>
+      <ion-card-title>{{cerbung.judul}}</ion-card-title>
+    </ion-card>
+  </div>
+</ion-content>

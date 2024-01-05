@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserserviceService } from '../userservice.service';
+import { ActivatedRoute, Route } from '@angular/router';
+import { CerbungserviceService } from '../cerbungservice.service';
 
 @Component({
   selector: 'app-users',
@@ -9,22 +11,30 @@ import { UserserviceService } from '../userservice.service';
 export class UsersPage implements OnInit {
 
   tipeStatus = "mostLike"
-  pengguna:any[]=[]
+  like:any[]=[]
   follow:any[]=[]
-
-  // chunkArray(arr: any[], chunkSize: number): any[][] {
-  //   const result = [];
-  //   for (let i = 0; i < arr.length; i += chunkSize) {
-  //     result.push(arr.slice(i, i + chunkSize));
-  //   }
-  //   return result;
-  // }
-  constructor(private userService :UserserviceService) {
-    this.follow = this.userService.users.filter(users => users.status === 'following');
+  username=""
+  
+  constructor(private cerbungservice:CerbungserviceService, private route: ActivatedRoute) {
+    // this.follow = this.userService.users.filter(users => users.status === 'following');
+    this.username=localStorage.getItem("app_username") ?? ''
    }
 
   ngOnInit() {
-    this.pengguna= this.userService.users
+    this.route.params.subscribe(
+      params => {
+        this.cerbungservice.displayMostLike().subscribe(
+          (data) => {
+            this.like = data
+          }
+        );
+        this.cerbungservice.displayFollow(this.username).subscribe(
+          (data) => {
+            this.follow = data
+          }
+        );
+      });
+
   }
 
 }

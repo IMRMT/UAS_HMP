@@ -61,6 +61,10 @@ const routes: Routes = [
     path: 'respond',
     loadChildren: () => import('./respond/respond.module').then( m => m.RespondPageModule)
   },
+  {
+    path: 'notifdetail/:index',
+    loadChildren: () => import('./notifdetail/notifdetail.module').then( m => m.NotifdetailPageModule)
+  },
 ];
 
 @NgModule({

@@ -24,43 +24,15 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="contents">
+  <div id="contents" *ngFor="let notif of notifs">
       <ion-card>
         <ion-card-content>
           <div class="text">
-            <div class="notif-date">09/09/2023</div>
-            <div class="notif-respond">Theodorus Request to Contributes</div>
+            <div class="notif-date">{{notif.date}}</div>
+            <div class="notif-respond">{{notif.nama_user}} Request to Contributes</div>
           </div>
           <ion-buttons slot="end" class="right">
-            <ion-button routerLink="/respond" routerLinkActive="router-link-active">
-              <ion-text>Respond</ion-text>
-            </ion-button>
-          </ion-buttons>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-card-content>
-          <div class="text">
-            <div class="notif-date">09/09/2023</div>
-            <div class="notif-respond">Michael Request to Contributes</div>
-          </div>
-          <ion-buttons slot="end" class="right">
-            <ion-button routerLink="/respond" routerLinkActive="router-link-active">
-              <ion-text>Respond</ion-text>
-            </ion-button>
-          </ion-buttons>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-card-content>
-          <div class="text">
-            <div class="notif-date">09/09/2023</div>
-            <div class="notif-respond">Farrel Request to Contributes</div>
-          </div>
-          <ion-buttons slot="end" class="right">
-            <ion-button routerLink="/respond" routerLinkActive="router-link-active">
+            <ion-button routerLink="/notifdetail/{{notif.id_cerbung}}" routerLinkActive="router-link-active">
               <ion-text>Respond</ion-text>
             </ion-button>
           </ion-buttons>

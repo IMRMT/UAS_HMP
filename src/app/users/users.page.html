@@ -37,19 +37,19 @@
   </div>
 
   <div *ngIf="tipeStatus == 'mostLike'">
-    <ion-card *ngFor="let userr of pengguna">
+    <ion-card *ngFor="let userr of like">
       <ion-card-content>
         <ion-grid>
           <ion-row>
             <ion-col size="auto">
               <ion-avatar>
-                <img [src]="userr.url" alt="{{ userr.name }}" />
+                <img [src]="userr.url" alt="{{ userr.akun_username }}" />
               </ion-avatar>
             </ion-col>
             <ion-col>
               <ion-list>
-                <ion-card-title>{{ userr.name }}</ion-card-title>
-                <ion-item>Since {{ userr.since }}</ion-item>
+                <ion-card-title>{{ userr.akun_username }}</ion-card-title>
+                <ion-item>Since {{ userr.created_at }}</ion-item>
               </ion-list>
             </ion-col>
             <ion-col size="auto" style="text-align: right;">
@@ -62,29 +62,28 @@
   </div>
 
   <div *ngIf="tipeStatus == 'Following'">
-    <ion-card *ngFor="let userr of follow">
+    <ion-card *ngFor="let follows of follow">
       <ion-card-content>
         <ion-grid>
           <ion-row>
             <ion-col size="auto">
               <ion-avatar>
-                <img [src]="userr.url" alt="{{ userr.name }}"  />
+                <img [src]="follows.url" alt="{{ follows.akun_username }}" />
               </ion-avatar>
             </ion-col>
             <ion-col>
               <ion-list>
-                <ion-card-title>{{ userr.name }}</ion-card-title>
-                <ion-item>Since {{ userr.since }}</ion-item>
+                <ion-card-title>{{ follows.akun_username }}</ion-card-title>
+                <ion-item>Since {{ follows.created_at }}</ion-item>
               </ion-list>
             </ion-col>
             <ion-col size="auto" style="text-align: right;">
-              <ion-item>{{ userr.like }}</ion-item>
+              <ion-item>{{ follows.like }}</ion-item>
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-card-content>
     </ion-card>
   </div>
-    
-
+  
 </ion-content>

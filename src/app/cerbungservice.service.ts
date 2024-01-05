@@ -21,12 +21,28 @@ export class CerbungserviceService {
     return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/cerbung_detail.php?id="+id)
   }
 
-  getParagraf(id: number): Observable<any> {
+  cerbungFollowing(name: string):Observable<any>{
+    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/following.php?name="+name)
+  }
+
+  getParagraf(id:number): Observable<any> {
     return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/get_paragraf.php?id="+id)
   }
 
-  cerbungFollowing(name: string):Observable<any>{
-    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/following.php?name="+name)
+  displayMostLike(): Observable<any> {
+    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/mostLike.php")
+  }
+
+  displayFollow(name:string): Observable<any> {
+    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/followUser.php?name="+name)
+  }
+
+  sendNotification(name:string): Observable<any> {
+    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/notification.php?name="+name)
+  }
+
+  detailNotification(id:number): Observable<any> {
+    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/notifdetail.php?id="+id)
   }
 
   addCerbung(c_title: string,  c_desc: string, c_url: string, c_genre: string, c_access: string,c_paragraf: string, c_username:string) {
