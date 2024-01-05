@@ -11,6 +11,7 @@ export class CerbungdetailPage implements OnInit {
 
   index = 1
   cerbungs:any={};
+  getpara: any={}
   paragraf=""
   name=""
   constructor(private route: ActivatedRoute, private cerbungservice: CerbungserviceService) {
@@ -24,6 +25,11 @@ export class CerbungdetailPage implements OnInit {
         this.cerbungservice.cerbungDetail(this.index).subscribe(
           (data) => {
             this.cerbungs = data
+          }
+        );
+        this.cerbungservice.getParagraf(this.index).subscribe(
+          (data) => {
+            this.getpara = data
           }
         );
       });
@@ -40,6 +46,14 @@ export class CerbungdetailPage implements OnInit {
         }
       }
     )
+  }
+
+  chunkArray(arr: any[], chunkSize: number): any[][] {
+    const result = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+      result.push(arr.slice(i, i + chunkSize));
+    }
+    return result;
   }
 
   addFollow(){

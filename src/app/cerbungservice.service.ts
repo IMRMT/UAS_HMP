@@ -21,6 +21,10 @@ export class CerbungserviceService {
     return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/cerbung_detail.php?id="+id)
   }
 
+  getParagraf(id: number): Observable<any> {
+    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/get_paragraf.php?id="+id)
+  }
+
   cerbungFollowing(name: string):Observable<any>{
     return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/following.php?name="+name)
   }
