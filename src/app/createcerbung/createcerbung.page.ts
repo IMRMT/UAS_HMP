@@ -39,7 +39,6 @@ export class CreatecerbungPage implements OnInit {
     this.c_genre ="";
     this.c_access= "Public";
     this.c_paragraf="";
-    this.c_fkusername="";
     this.agreedToTerms=false;
   }
 
@@ -51,7 +50,7 @@ export class CreatecerbungPage implements OnInit {
         this.jenistampilan = section;
       }
     } else if(this.jenistampilan =="second"){
-      if( this.c_access == "Public" ||this.c_paragraf == ''){
+      if( this.c_access == '' ||this.c_paragraf == ''){
         alert("Mohon isi data yang kosong !")
       }else{
         this.jenistampilan = section;

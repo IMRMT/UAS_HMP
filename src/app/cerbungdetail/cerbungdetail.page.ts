@@ -41,4 +41,17 @@ export class CerbungdetailPage implements OnInit {
       }
     )
   }
+
+  addFollow(){
+    this.cerbungservice.addFollow(this.name,this.index).subscribe(
+      (response:any) => {
+        if(response.result == "success"){
+          alert("Success")
+        }
+        else {
+          alert(response.message)
+        }
+      }
+    )
+  }
 }

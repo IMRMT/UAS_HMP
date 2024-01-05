@@ -3,7 +3,7 @@
   <!-- tabs.page.html -->
 
   <!-- <ion-router-outlet id="main-content"> </ion-router-outlet> -->
-  <ion-menu auto-hide="true" content-id="main-content" *ngIf="name">
+  <ion-menu auto-hide="true" content-id="main-content" *ngIf="name" id="toggle">
     <ion-header>
       <ion-toolbar>
         <ion-title>Cerbung</ion-title>
@@ -46,7 +46,7 @@
     </ion-content>
   </ion-menu>
 
-  <ion-content *ngIf="!name" class="ion-padding">
+  <ion-content *ngIf="!name" class="ion-padding" id="login">
     <ion-card>
       <ion-item>
         <ion-input [(ngModel)]="username" label="Username" labelPlacement="floating" />
@@ -60,8 +60,8 @@
 
   <ion-router-outlet *ngIf="name" id="main-content"></ion-router-outlet>
 
-  <ion-tabs *ngIf="name">
-    <ion-tab-bar slot="bottom">
+  <ion-tabs *ngIf="name" >
+    <ion-tab-bar slot="bottom" id="bottomNav">
       <ion-tab-button tab="home">
         <ion-icon name="home"></ion-icon>
         <ion-label>Home</ion-label>

@@ -15,6 +15,7 @@ export class AppComponent {
   constructor(private cerbungService: CerbungserviceService) {
     this.username=localStorage.getItem("app_username") ?? ''
     this.name=localStorage.getItem("app_name") ?? ''
+    this.password=localStorage.getItem("app_password") ?? ''
   }
 
   login() {
@@ -24,8 +25,10 @@ export class AppComponent {
           alert("success")
           this.username = response.username
           this.name = response.username
+          this.password
           localStorage.setItem("app_username",this.username)
           localStorage.setItem("app_name",this.name)
+          localStorage.setItem("app_password",this.password)
         }
         else {
           alert(response.message)
@@ -36,7 +39,9 @@ export class AppComponent {
   logout() {
     this.username = ""
     this.name= ""
+    this.password
     localStorage.removeItem("username")
-    localStorage.removeItem("name")  
+    localStorage.removeItem("name")
+    localStorage.removeItem("password")
   }
 }

@@ -13,6 +13,10 @@ export class CerbungserviceService {
     return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/cerbungs.php?search="+search);
   }
 
+  userList(search: string): Observable<any> {
+    return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/users.php?search="+search);
+  }
+
   cerbungDetail(id: number): Observable<any> {
     return this.http.get("https://ubaya.me/hybrid/160421144/cerbungs/cerbung_detail.php?id="+id)
   }
@@ -29,7 +33,7 @@ export class CerbungserviceService {
     body.set('genre', c_genre);
     body.set('paragraf', c_paragraf);
     body.set('url_cerbung', c_url);
-    body.set('akses', c_access.toString());
+    body.set('akses', c_access);
     body.set('fk_username', c_username);
     const urlEncodedData = body.toString();
     return this.http.post(
@@ -67,5 +71,25 @@ export class CerbungserviceService {
     const urlEncodedData = body.toString();
     return this.http.post(
     "https://ubaya.me/hybrid/160421144/cerbungs/add_paragraf.php", urlEncodedData, { headers });
+  }
+
+  addFollow(c_akun_username:string,c_idCerbung: number ){
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('akun_username', c_akun_username);
+    body.set('cerbung_idcerbung', c_idCerbung.toString());
+    const urlEncodedData = body.toString();
+    return this.http.post(
+    "https://ubaya.me/hybrid/160421144/cerbungs/add_followingCerbung.php", urlEncodedData, { headers });
+  }
+
+  updatePass(c_username:string,c_password:string){
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('username', c_username);
+    body.set('password', c_password);
+    const urlEncodedData = body.toString();
+    return this.http.post(
+    "https://ubaya.me/hybrid/160421144/cerbungs/update_password.php", urlEncodedData, { headers });
   }
 }

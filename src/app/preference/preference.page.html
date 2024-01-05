@@ -7,8 +7,8 @@
       Prefs
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/notification" routerLinkActive="router-link-active" >
-        <ion-icon name="notifications" ></ion-icon>
+      <ion-button routerLink="/notification" routerLinkActive="router-link-active">
+        <ion-icon name="notifications"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -24,14 +24,13 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-
-    <ion-avatar position="center" style="display: block;
-    margin: 0 auto; width: 200px; height: 200px;"><ion-img [src]="accounts[0].url" alt="https://ionicframework.com/docs/img/demos/card-media.png"
-      ></ion-img></ion-avatar>
+  <div *ngFor="let akun of akuns" id="container">
+    <ion-avatar position="center" style="display: block; margin: 0 auto; width: 200px; height: 200px;">
+      <ion-img [src]="akun.url"></ion-img>
+    </ion-avatar>
     <ion-item>
       <ion-label>Dark Mode</ion-label>
-      <ion-toggle></ion-toggle>
+      <ion-toggle slot="end" (ionChange)='toggleTheme($event)'></ion-toggle>
     </ion-item>
     <ion-item>
       <ion-label>Notifications</ion-label>
@@ -41,22 +40,21 @@
       <ion-row>
         <ion-item>
           <ion-label position="floating">Old Password</ion-label>
-          <ion-input [(ngModel)]="accounts[0].Password"></ion-input>
+          <ion-input>{{akun.password}}</ion-input>
         </ion-item>
       </ion-row>
       <ion-row>
         <ion-item>
           <ion-label position="floating">New Password</ion-label>
-          <ion-input></ion-input>
+          <ion-input [(ngModel)]="newPassOne"></ion-input>
         </ion-item>
       </ion-row>
       <ion-row>
         <ion-item>
           <ion-label position="floating">Retype New Password</ion-label>
-          <ion-input></ion-input>
+          <ion-input [(ngModel)]="newPassTwo"></ion-input>
         </ion-item>
       </ion-row>
     </ion-card-header>
-    <ion-button routerLink="/home" routerLinkActive="router-link-active" >Change Password</ion-button>
+    <ion-button  (click)="updatePass()">Change Password</ion-button>
   </div>
-

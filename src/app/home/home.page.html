@@ -45,39 +45,15 @@
         <ion-label>Kocak</ion-label>
       </ion-segment-button>
     </ion-segment>
-  </div>
 
-  <!-- || (search && tipeGenre == 'All') -->
-  <div *ngIf="tipeGenre == 'All' ">
-    <ion-card *ngFor="let cerbungs2 of chunkArray(cerbungs, 2); let i = index">
-      <ng-container *ngFor="let cerbung of cerbungs2; let i2 = index">
-        <img [src]="cerbung.url_cerbung" alt="{{cerbung.judul}}" class="image" />
-        <ion-card-header>
-          <ion-card-title>{{cerbung.judul}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-item>
-            by {{cerbung.fk_username}}
+
+    <!-- || (search && tipeGenre == 'All') -->
+    <div *ngIf="tipeGenre == 'All' ">
+      <ion-card *ngFor="let cerbungs2 of chunkArray(cerbungs, 2); let i = index">
+        <ng-container *ngFor="let cerbung of cerbungs2; let i2 = index">
+          <ion-item id="gambar-potong">
+            <img [src]="cerbung.url_cerbung" alt="{{cerbung.judul}}" class="image" />
           </ion-item>
-          <ion-list>
-            <ion-item>{{ cerbung.deskripsi }}</ion-item>
-          </ion-list>
-          <div class="right">
-            <ion-button routerLink="/cerbungdetail/{{cerbung.idcerbung}}" default="true"
-              outline="true">Read</ion-button>
-          </div>
-        </ion-card-content>
-      </ng-container>
-    </ion-card>
-    <br>
-      
-  </div> 
-
-  <div *ngIf="tipeGenre == tipeGenre ">
-    <ion-card *ngFor="let cerbungs2 of chunkArray(cerbungs, 2); let i = index">
-      <ng-container *ngFor="let cerbung of cerbungs2; let i2 = index">
-        <div *ngIf="tipeGenre==cerbung.genre">
-          <img [src]="cerbung.url_cerbung" alt="{{cerbung.judul}}" class="image" />
           <ion-card-header>
             <ion-card-title>{{cerbung.judul}}</ion-card-title>
           </ion-card-header>
@@ -93,10 +69,37 @@
                 outline="true">Read</ion-button>
             </div>
           </ion-card-content>
-        </div>
-      </ng-container>
-    </ion-card>
-    <br>
-      
-  </div> 
+        </ng-container>
+      </ion-card>
+      <br>
+        
+    </div> 
+
+    <div *ngIf="tipeGenre == tipeGenre ">
+      <ion-card *ngFor="let cerbungs2 of chunkArray(cerbungs, 2); let i = index">
+        <ng-container *ngFor="let cerbung of cerbungs2; let i2 = index">
+          <div *ngIf="tipeGenre==cerbung.genre">
+            <img [src]="cerbung.url_cerbung" alt="{{cerbung.judul}}" class="image" />
+            <ion-card-header>
+              <ion-card-title>{{cerbung.judul}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-item>
+                by {{cerbung.fk_username}}
+              </ion-item>
+              <ion-list>
+                <ion-item>{{ cerbung.deskripsi }}</ion-item>
+              </ion-list>
+              <div class="right">
+                <ion-button routerLink="/cerbungdetail/{{cerbung.idcerbung}}" default="true"
+                  outline="true">Read</ion-button>
+              </div>
+            </ion-card-content>
+          </div>
+        </ng-container>
+      </ion-card>
+      <br>
+        
+    </div> 
+  </div>
 </ion-content>

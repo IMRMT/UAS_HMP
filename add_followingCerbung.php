@@ -4,13 +4,12 @@ include('koneksi.php');
 
 extract($_POST);
 //$_POST['name'] $_POST['desc']
-$story_teller = $_POST['story_teller'];
-$idc= $_POST['idc'];
-$paragraf=$_POST['paragraf'];
+$akun_username = $_POST['akun_username'];
+$cerbung_idcerbung= $_POST['cerbung_idcerbung'];
 
-$stmt = $conn->prepare("INSERT INTO add_paragraf (story_teller,id_cerbung,paragraf)VALUES(?,?,?)");
+$stmt = $conn->prepare("INSERT INTO following(akun_username,cerbung_idcerbung)VALUES(?,?);");
 
-$stmt->bind_param("sis", $story_teller, $idc, $paragraf);
+$stmt->bind_param("si", $akun_username, $cerbung_idcerbung);
 if ($stmt->execute()) {
    $arr = ["result" => "success"];
 } else {
