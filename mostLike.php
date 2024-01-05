@@ -1,7 +1,8 @@
 <?php
 include("koneksi.php");
-$id = $_GET['id'];
-$sql = "SELECT paragraf,story_teller FROM add_paragraf WHERE id_cerbung=$id";
+
+$sql = "SELECT l.*,a.username,a.url,YEAR(a.created_at) as created_at 
+        FROM likes l INNER JOIN akuns a ON a.username=l.akun_username";
 $result = $conn->query($sql);
 // $data = $result->fetch_assoc();
 $data = array();
